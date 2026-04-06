@@ -25,6 +25,21 @@
 - `references/`
 - `scripts/`
 
+## 从 GitHub 安装到 Codex
+
+对于 Codex，请从 `codex/mail` 子目录安装这个 skill，而不是直接从仓库根目录安装。
+
+示例：
+
+```bash
+python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --repo CQZW/mail-skill \
+  --path codex/mail \
+  --name mail
+```
+
+安装完成后，重启 Codex。
+
 ## 快速对话范例
 
 开发者通常通过“怎么和 AI 说”会更快理解这个 skill，而不是先去看底层命令。

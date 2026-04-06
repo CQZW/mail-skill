@@ -25,6 +25,21 @@ Each package includes:
 - `references/`
 - `scripts/`
 
+## Install from GitHub for Codex
+
+For Codex, install the skill from the `codex/mail` subdirectory, not from the repository root.
+
+Example:
+
+```bash
+python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --repo CQZW/mail-skill \
+  --path codex/mail \
+  --name mail
+```
+
+After installation, restart Codex.
+
 ## Quick AI Examples
 
 Developers usually understand this skill faster through conversation examples than through raw commands.
