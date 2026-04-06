@@ -2,6 +2,8 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+Give AI its own mailbox and connect it to the real world through MCP.
+
 `mail` is an open-source skill package for working with the [fromaiagent](https://www.fromaiagent.com) mailbox system from Codex, Claude Code, and Cursor.
 
 It is designed to make mailbox operations easier for both developers and AI agents:
@@ -9,6 +11,21 @@ It is designed to make mailbox operations easier for both developers and AI agen
 - keep mailbox profiles, public keys, and private keys in one local store
 - prepare correctly signed arguments for official fromaiagent MCP tools
 - reduce the need to repeatedly read low-level mailbox integration documentation
+
+## What the fromaiagent Mailbox System Can Do
+
+fromaiagent mailboxes are built for AI-driven workflows, not just manual email usage.
+
+With the mailbox system and this skill, developers can:
+
+- register and manage dedicated AI mailboxes
+- send email to external inboxes and other fromaiagent mailboxes
+- read inbox content, threads, and mailbox activity from AI tools
+- watch mailbox events for newly ingested mail
+- inspect mailbox status, usage, and account state
+- surface service-provided management links when they are returned
+
+This makes the skill useful not only as a convenience layer, but also as a practical way to integrate fromaiagent mailboxes into agent workflows.
 
 ## Packages
 
@@ -107,10 +124,10 @@ Test email submitted successfully.
 - createdAt: 2026-04-06T10:21:41.142Z
 ```
 
-If the mailbox hits a plan limit, a realistic AI reply should look like:
+If the mailbox returns a service limit response, a realistic AI reply can look like:
 
 ```text
-The send request was blocked by mailbox plan limits.
+The send request was blocked by a mailbox limit.
 
 - error: mail_plan_limit_exceeded
 - currentPlan: free
@@ -119,8 +136,8 @@ The send request was blocked by mailbox plan limits.
 - currentLimit: 5000
 - nextPlan: plus
 
-Upgrade link:
-https://api.fromaiagent.com/upgrade?address=<mailbox-address>&targetPlan=<plan>
+Management link:
+<service-provided-link>
 ```
 
 ### Example 3: Get Mailbox Status
@@ -146,8 +163,8 @@ Mailbox status:
 - externalAddressCount: 1 / 200
 - internalMailVolume: 0 / 100000
 
-Manage subscription:
-https://api.fromaiagent.com/billing/manage?address=<mailbox-address>&token=<signed-token>
+Management link:
+<service-provided-link>
 ```
 
 ### Example 4: Read the Latest Email
@@ -344,17 +361,17 @@ bash scripts/prepare-tool-args.sh create_mailbox ./create-mailbox.json primary-m
 bash scripts/profile.sh assign-address primary-mailbox <activated-address>
 ```
 
-## Billing and Subscription Behavior
+## Service-Provided Management Links
 
-When `send_mail` fails because the mailbox plan quota is exceeded, the user-facing workflow should:
+When `send_mail` returns a service limit response, the user-facing workflow should:
 
-- clearly say this is a billing or quota issue
-- show the returned payment or upgrade link directly
+- clearly say the request was blocked by mailbox limits
+- show any service-provided management link directly when one is returned
 
-When `get_mailbox_status` returns a subscription management URL, the user-facing workflow should:
+When `get_mailbox_status` returns a management URL, the user-facing workflow should:
 
-- clearly label it as the subscription management entry
-- make it clear the same link can be used to manage or cancel the subscription when applicable
+- clearly label it as a mailbox management entry
+- show the returned link directly
 
 ## Install for Codex
 

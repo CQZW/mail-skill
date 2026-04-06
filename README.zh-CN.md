@@ -2,6 +2,8 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+让 AI 拥有自己的邮箱，并通过 MCP 与真实世界通信。
+
 `mail` 是一个面向 Codex、Claude Code 和 Cursor 的开源技能包，用来更方便地接入和使用 [fromaiagent](https://www.fromaiagent.com) 邮箱系统。
 
 它主要解决三类实际问题：
@@ -9,6 +11,21 @@
 - 把邮箱 profile、公钥、私钥集中保存在本地
 - 为官方 fromaiagent MCP 工具生成正确签名参数
 - 减少开发者和 AI 反复查阅底层邮箱接入文档的成本
+
+## fromaiagent 邮箱系统能做什么
+
+fromaiagent 邮箱系统不是面向手工操作的普通邮箱，而是面向 AI 工作流设计的邮箱能力层。
+
+结合这个 skill，开发者可以：
+
+- 注册并管理专门给 AI 使用的邮箱
+- 向外部邮箱和其它 fromaiagent 邮箱发送邮件
+- 在 AI 工具里读取收件箱内容、线程和邮箱活动
+- 监听新邮件进入邮箱时的事件
+- 查询邮箱状态、用量和账户状态
+- 在服务端返回管理链接时直接展示给开发者或 AI
+
+这样这个 skill 不只是一个便捷封装，也是一种更直接的 fromaiagent 邮箱接入方式。
 
 ## 包含的技能包
 
@@ -107,10 +124,10 @@ Body: This is a test email sent through the mail skill.
 - createdAt: 2026-04-06T10:21:41.142Z
 ```
 
-如果邮箱触发了套餐额度限制，比较真实的 AI 回复应该像这样：
+如果邮箱返回了服务端限制响应，比较真实的 AI 回复可以像这样：
 
 ```text
-这次发送被邮箱套餐额度拦住了。
+这次发送被邮箱限制拦住了。
 
 - error: mail_plan_limit_exceeded
 - currentPlan: free
@@ -119,8 +136,8 @@ Body: This is a test email sent through the mail skill.
 - currentLimit: 5000
 - nextPlan: plus
 
-升级链接：
-https://api.fromaiagent.com/upgrade?address=<mailbox-address>&targetPlan=<plan>
+管理链接：
+<service-provided-link>
 ```
 
 ### 范例 3：查看邮箱状态
@@ -146,8 +163,8 @@ Use mail to get mailbox status for primary-mailbox.
 - externalAddressCount: 1 / 200
 - internalMailVolume: 0 / 100000
 
-订阅管理链接：
-https://api.fromaiagent.com/billing/manage?address=<mailbox-address>&token=<signed-token>
+管理链接：
+<service-provided-link>
 ```
 
 ### 范例 4：读取最新邮件
@@ -346,17 +363,17 @@ bash scripts/prepare-tool-args.sh create_mailbox ./create-mailbox.json primary-m
 bash scripts/profile.sh assign-address primary-mailbox <activated-address>
 ```
 
-## 付费与订阅行为
+## 服务端返回的管理链接
 
-当 `send_mail` 因套餐额度耗尽而失败时，面向用户的表现应该是：
+当 `send_mail` 返回服务端限制响应时，面向用户的表现应该是：
 
-- 明确说明这是套餐或额度问题
-- 直接展示返回的付费或升级链接
+- 明确说明请求被邮箱限制拦住了
+- 如果服务端返回了管理链接，就直接展示出来
 
-当 `get_mailbox_status` 返回订阅管理链接时，面向用户的表现应该是：
+当 `get_mailbox_status` 返回管理地址时，面向用户的表现应该是：
 
-- 明确标注这是订阅管理入口
-- 明确说明在适用情况下，同一个链接也可以用于取消订阅
+- 明确标注这是邮箱管理入口
+- 直接展示返回的链接
 
 ## 安装到 Codex
 
