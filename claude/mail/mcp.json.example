@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "fromaiagent": {
+      "url": "https://api.fromaiagent.com/mcp"
+    }
+  }
+}

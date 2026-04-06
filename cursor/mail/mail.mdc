@@ -1,0 +1,12 @@
+---
+description: Use the mail Cursor skill for fromaiagent mailbox tasks.
+alwaysApply: false
+---
+
+For fromaiagent mailbox tasks:
+
+- Check local profiles first.
+- Use `.cursor/mail/scripts/profile.sh` and `.cursor/mail/scripts/prepare-tool-args.sh` instead of rebuilding mailbox keys or signatures manually.
+- Keep private keys local.
+- Surface payment links for `send_mail` quota failures.
+- Surface subscription management links from `get_mailbox_status`.
