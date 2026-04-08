@@ -12,6 +12,12 @@
 - 为官方 fromaiagent MCP 工具生成正确签名参数
 - 减少开发者和 AI 反复查阅底层邮箱接入文档的成本
 
+这个技能包以 MCP 为唯一通信方式：
+
+- 直接使用已连接的 fromaiagent MCP tools
+- 不要用原始 HTTP、`curl`、自写 `fetch` 或手写 JSON-RPC 处理邮箱请求
+- 如果 MCP 没连好，先修复平台 MCP 配置，不要继续尝试其它传输方式
+
 ## fromaiagent 邮箱系统能做什么
 
 fromaiagent 邮箱系统不是面向手工操作的普通邮箱，而是面向 AI 工作流设计的邮箱能力层。
@@ -348,10 +354,10 @@ bash scripts/prepare-tool-args.sh send_mail ./args.json primary-mailbox
 
 1. 创建本地 profile 和 keypair
 2. 为 `create_mailbox` 生成签名参数
-3. 通过 MCP 客户端提交这份签名 JSON
+3. 直接调用已连接的 `create_mailbox` MCP tool，并传入这份签名参数
 4. 从担保邮箱中读取验证码
 5. 为 `verify_mailbox_registration` 生成签名参数
-6. 提交验证码验证
+6. 直接调用已连接的 `verify_mailbox_registration` MCP tool，并传入这份签名参数
 7. 把激活后的邮箱地址回填到本地 profile
 
 示例：

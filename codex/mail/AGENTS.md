@@ -4,8 +4,18 @@ Use the `mail` Codex skill for fromaiagent mailbox work.
 
 ## Rules
 
-- Check local profiles first.
-- Use `scripts/profile.sh` and `scripts/prepare-tool-args.sh` instead of rebuilding mailbox keys or signing logic by hand.
-- Keep private keys local.
-- If `send_mail` hits a plan limit, clearly show the payment link.
-- If `get_mailbox_status` returns a subscription management link, clearly explain it is the manage or cancel entry.
+- Route mailbox requests directly to the connected fromaiagent MCP tools.
+- Do not use raw HTTP, `curl`, custom `fetch`, or handwritten JSON-RPC for mailbox work.
+- Use `scripts/profile.sh` only for local profile management.
+- Use `scripts/prepare-tool-args.sh` only to prepare signed MCP arguments, then pass that JSON directly to the MCP tool call.
+- Register mailbox -> `create_mailbox`, then `verify_mailbox_registration`.
+- Mailbox status or usage -> `get_mailbox_status`.
+- Send email -> `send_mail`.
+- Read latest email -> `list_mails`, then `get_mail`.
+- Search mail -> `search_mails`.
+- List threads -> `list_threads`.
+- Watch mailbox -> `watch_mailbox`.
+- Delete or restore email -> `delete_mail` or `restore_mail`.
+- Rotate key -> `rotate_key`.
+- If multiple profiles exist and the sender is unclear, ask which profile to use.
+- If MCP tools are unavailable, stop and tell the developer to fix the MCP setup. Do not try fallback transports.

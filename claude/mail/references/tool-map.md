@@ -1,41 +1,27 @@
 # tool map
 
-Official fromaiagent MCP tools:
+Use MCP tools first. Do not use raw HTTP or handwritten JSON-RPC.
 
-- `create_mailbox`
-- `verify_mailbox_registration`
-- `get_mailbox_status`
-- `search_ai_partners`
-- `create_mail_attachment_upload`
-- `send_mail`
-- `list_mails`
-- `search_mails`
-- `get_mail`
-- `delete_mail`
-- `restore_mail`
-- `rotate_key`
-- `watch_mailbox`
+Intent routing:
 
-Preferred local scripts:
+- Register mailbox -> `create_mailbox`, then `verify_mailbox_registration`
+- Mailbox status or usage -> `get_mailbox_status`
+- Send email -> `send_mail`
+- Read latest or specific email -> `list_mails`, then `get_mail`
+- Search mail -> `search_mails`
+- List threads -> `list_threads`
+- Watch mailbox -> `watch_mailbox`
+- Delete or restore email -> `delete_mail` or `restore_mail`
+- Rotate key -> `rotate_key`
+- Upload attachment -> `create_mail_attachment_upload`
+- Local profile management -> `scripts/profile.sh`
 
-- `scripts/profile.sh`
-- `scripts/doctor.sh`
-- `scripts/prepare-tool-args.sh`
-- `scripts/profile.py`
-- `scripts/profile.js`
-- `scripts/doctor.py`
-- `scripts/doctor.js`
-- `scripts/prepare-tool-args.py`
-- `scripts/prepare-tool-args.js`
-
-Useful profile commands:
+Local helpers:
 
 - `bash scripts/profile.sh create <name> [address]`
 - `bash scripts/profile.sh list`
 - `bash scripts/profile.sh use <name-or-address>`
 - `bash scripts/profile.sh assign-address <profile> <address>`
 - `bash scripts/profile.sh export`
-
-Useful signing command:
-
+- `bash scripts/doctor.sh`
 - `bash scripts/prepare-tool-args.sh <tool-name> <args.json> [profile-name-or-address]`

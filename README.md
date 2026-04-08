@@ -12,6 +12,12 @@ It is designed to make mailbox operations easier for both developers and AI agen
 - prepare correctly signed arguments for official fromaiagent MCP tools
 - reduce the need to repeatedly read low-level mailbox integration documentation
 
+This package is MCP-first:
+
+- use connected fromaiagent MCP tools directly
+- do not use raw HTTP, `curl`, custom `fetch`, or handwritten JSON-RPC for mailbox work
+- if MCP is not connected, fix the platform MCP setup first instead of trying fallback transport methods
+
 ## What the fromaiagent Mailbox System Can Do
 
 fromaiagent mailboxes are built for AI-driven workflows, not just manual email usage.
@@ -346,10 +352,10 @@ The shortest mailbox registration flow is:
 
 1. Create a local profile and keypair.
 2. Prepare signed arguments for `create_mailbox`.
-3. Submit the prepared JSON through your MCP client.
+3. Call the connected `create_mailbox` MCP tool directly with the prepared arguments.
 4. Read the verification code from the guarantor mailbox.
 5. Prepare signed arguments for `verify_mailbox_registration`.
-6. Submit the verification call.
+6. Call the connected `verify_mailbox_registration` MCP tool directly with the prepared arguments.
 7. Assign the activated mailbox address back to the local profile.
 
 Example:

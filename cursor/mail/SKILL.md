@@ -1,30 +1,34 @@
 ---
 name: mail
-description: Use when Cursor should help with fromaiagent mailboxes, including profile management, signed tool arguments, and project cursor MCP and rule setup.
+description: Use when Cursor should register mailboxes, send or read mail, inspect mailbox state, or manage local fromaiagent mailbox profiles through MCP tools.
 ---
 
 # mail for Cursor
 
-Use this skill when Cursor needs to work with fromaiagent mailboxes.
+Use MCP only.
 
-## Workflow
+- Never use raw HTTP, `curl`, custom `fetch`, or handwritten JSON-RPC.
+- Use `scripts/profile.sh` only for local profile work.
+- Use `scripts/prepare-tool-args.sh` only to prepare signed MCP arguments, then call the MCP tool with that JSON.
+- If mailbox tools do not appear, tell the developer to enable the `fromaiagent` MCP server in Cursor Settings and reload the project window.
 
-1. Use the shell wrappers in `scripts/` first.
-2. Let the wrapper auto-select Python or Node.js.
-3. Manage mailbox profiles with `scripts/profile.sh`.
-4. Prepare official MCP tool arguments with `scripts/prepare-tool-args.sh`.
-5. Use the `.cursor/mcp.json` and `.cursor/rules/mail.mdc` files in this skill package.
-6. In Cursor Settings, enable the `fromaiagent` MCP server if it appears as disabled, then reload the project window if needed.
+Intent map:
 
-## Rules
+- register mailbox -> `create_mailbox`, then `verify_mailbox_registration`
+- mailbox status or usage -> `get_mailbox_status`
+- send email -> `send_mail`
+- read mail -> `list_mails`, then `get_mail`
+- search mail -> `search_mails`
+- list threads -> `list_threads`
+- watch mailbox -> `watch_mailbox`
+- delete or restore mail -> `delete_mail` / `restore_mail`
+- rotate key -> `rotate_key`
+- upload attachment -> `create_mail_attachment_upload`
 
-- Prefer saved profiles over asking the developer to re-find private keys.
-- Use `scripts/profile.sh create <name> [address]` to create a local mailbox keypair when no profile exists yet.
-- After registration succeeds, use `scripts/profile.sh assign-address <profile> <address>` to write the activated mailbox address back into the local profile.
-- If multiple profiles exist, confirm the active one before `send_mail` or `rotate_key`.
-- Use `scripts/prepare-tool-args.sh` instead of rebuilding signatures manually.
-- Use the shell wrappers first so the skill can adapt to Python or Node.js automatically.
-- Make sure the `fromaiagent` MCP server is enabled in Cursor before testing mailbox tools.
-- For `create_mailbox`, allow the args file to omit `address` when the user wants the server to assign one automatically.
-- If `send_mail` fails because the plan quota is exceeded, clearly surface the returned upgrade link.
-- If `get_mailbox_status` returns a subscription management link, clearly say it can be used to manage or cancel the subscription.
+Decision rules:
+
+- Execute from intent by default.
+- Ask only when the sender profile is unclear, or when `send_mail`, `delete_mail`, `restore_mail`, or `rotate_key` is ambiguous.
+- If multiple profiles exist and the sender is not explicit, ask which profile to use.
+- `create_mailbox` may omit the mailbox address when the server should assign one.
+- After successful registration, run `scripts/profile.sh assign-address <profile> <address>`.
