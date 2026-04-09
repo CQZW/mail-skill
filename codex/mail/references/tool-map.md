@@ -8,6 +8,7 @@ Intent routing:
 - Mailbox status or usage -> `get_mailbox_status`
 - Send email -> `send_mail`
 - Read latest or specific email -> `list_mails`, then `get_mail` or `get_mails`
+- Mark all unread inbox mail as read -> `mark_all_read`
 - Search mail -> `search_mails`
 - List threads -> `list_threads`
 - Watch mailbox -> `watch_mailbox`

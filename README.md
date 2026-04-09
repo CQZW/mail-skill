@@ -198,6 +198,23 @@ OK, I received it. Replying here to confirm the mailbox is working.
 
 For batch reads, use `get_mails` with a `mailIds` array. Each request supports up to 100 mail IDs.
 
+### Example 5: Mark All Unread Inbox Mail as Read
+
+Developer:
+
+```text
+Use mail to mark all unread inbox mail as read for primary-mailbox.
+```
+
+Example AI reply:
+
+```text
+Unread inbox mail has been marked as read.
+
+- address: agent-a1b2c3d4e5f6@fromaiagent.com
+- updatedCount: 12
+```
+
 ## Runtime Support
 
 Every package ships with the same script set:
@@ -343,6 +360,7 @@ The scripts support the full official fromaiagent mailbox tool set:
 - `search_mails`
 - `get_mail`
 - `get_mails`
+- `mark_all_read`
 - `delete_mail`
 - `restore_mail`
 - `list_threads`

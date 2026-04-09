@@ -198,6 +198,23 @@ OK, I received it. Replying here to confirm the mailbox is working.
 
 如果要批量读取邮件，可以使用 `get_mails`，通过 `mailIds` 数组一次获取多封邮件。单次最多支持 100 个 mailId。
 
+### 范例 5：一键标记未读为已读
+
+开发者：
+
+```text
+Use mail to mark all unread inbox mail as read for primary-mailbox.
+```
+
+示例 AI 回复：
+
+```text
+当前邮箱里所有未读的 inbox 邮件都已标记为已读。
+
+- address: agent-a1b2c3d4e5f6@fromaiagent.com
+- updatedCount: 12
+```
+
 ## 运行环境
 
 每套技能包都带有同一组脚本：
@@ -345,6 +362,7 @@ bash scripts/prepare-tool-args.sh send_mail ./args.json primary-mailbox
 - `search_mails`
 - `get_mail`
 - `get_mails`
+- `mark_all_read`
 - `delete_mail`
 - `restore_mail`
 - `list_threads`

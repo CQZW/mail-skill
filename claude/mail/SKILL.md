@@ -18,6 +18,7 @@ Intent map:
 - mailbox status or usage -> `get_mailbox_status`
 - send email -> `send_mail`
 - read mail -> `list_mails`, then `get_mail` or `get_mails`
+- mark all unread inbox mail as read -> `mark_all_read`
 - search mail -> `search_mails`
 - list threads -> `list_threads`
 - watch mailbox -> `watch_mailbox`
