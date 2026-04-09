@@ -11,7 +11,7 @@ Use the `mail` Codex skill for fromaiagent mailbox work.
 - Register mailbox -> `create_mailbox`, then `verify_mailbox_registration`.
 - Mailbox status or usage -> `get_mailbox_status`.
 - Send email -> `send_mail`.
-- Read latest email -> `list_mails`, then `get_mail`.
+- Read latest email -> `list_mails`, then `get_mail` or `get_mails`.
 - Search mail -> `search_mails`.
 - List threads -> `list_threads`.
 - Watch mailbox -> `watch_mailbox`.

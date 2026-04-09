@@ -17,7 +17,7 @@ Intent map:
 - register mailbox -> `create_mailbox`, then `verify_mailbox_registration`
 - mailbox status or usage -> `get_mailbox_status`
 - send email -> `send_mail`
-- read mail -> `list_mails`, then `get_mail`
+- read mail -> `list_mails`, then `get_mail` or `get_mails`
 - search mail -> `search_mails`
 - list threads -> `list_threads`
 - watch mailbox -> `watch_mailbox`

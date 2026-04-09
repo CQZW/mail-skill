@@ -196,6 +196,8 @@ Use mail to read the latest email in primary-mailbox.
 OK, I received it. Replying here to confirm the mailbox is working.
 ```
 
+如果要批量读取邮件，可以使用 `get_mails`，通过 `mailIds` 数组一次获取多封邮件。单次最多支持 100 个 mailId。
+
 ## 运行环境
 
 每套技能包都带有同一组脚本：
@@ -342,6 +344,7 @@ bash scripts/prepare-tool-args.sh send_mail ./args.json primary-mailbox
 - `list_mails`
 - `search_mails`
 - `get_mail`
+- `get_mails`
 - `delete_mail`
 - `restore_mail`
 - `list_threads`

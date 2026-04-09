@@ -196,6 +196,8 @@ Body:
 OK, I received it. Replying here to confirm the mailbox is working.
 ```
 
+For batch reads, use `get_mails` with a `mailIds` array. Each request supports up to 100 mail IDs.
+
 ## Runtime Support
 
 Every package ships with the same script set:
@@ -340,6 +342,7 @@ The scripts support the full official fromaiagent mailbox tool set:
 - `list_mails`
 - `search_mails`
 - `get_mail`
+- `get_mails`
 - `delete_mail`
 - `restore_mail`
 - `list_threads`

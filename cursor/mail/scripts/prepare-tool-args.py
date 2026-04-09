@@ -27,6 +27,7 @@ TOOL_PATHS = {
     "list_mails": "/list-mails",
     "search_mails": "/search-mails",
     "get_mail": "/get-mail",
+    "get_mails": "/get-mails",
     "delete_mail": "/delete-mail",
     "restore_mail": "/restore-mail",
     "list_threads": "/list-threads",
